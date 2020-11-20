@@ -1,6 +1,7 @@
 
 import './App.css';
 import React, {useEffect, useState} from 'react'
+import TablesMap from './components/TablesMap.js'
 
 function App() {
 
@@ -27,14 +28,9 @@ function App() {
 
       <div>{groups.map(group => {
         return (
-        <div>
+        <div key = {group.id}>
           <h4>{group.id}</h4>
-        <ul key = {group.id}>{group.drinks.map((drink,index) => 
-        {
-          return <li key = {index}>{drink.name}</li>
-        })}
-        </ul>
-        <ul></ul>
+
         </div>)
       })}
       </div>
