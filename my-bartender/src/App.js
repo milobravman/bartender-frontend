@@ -24,16 +24,11 @@ function App() {
   return (
     <div className="App">
 
+      <TablesMap/>
 
 
-      <div>{groups.map(group => {
-        return (
-        <div key = {group.id}>
-          <h4>{group.id}</h4>
 
-        </div>)
-      })}
-      </div>
+
 
 
 
