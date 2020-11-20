@@ -27,7 +27,7 @@ function App() {
 
       <div>{groups.map(group => {
         return (
-        <div>
+        <div key = {group.id}>
           <h4>{group.id}</h4>
         <ul key = {group.id}>{group.drinks.map((drink,index) => 
         {
