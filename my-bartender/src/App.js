@@ -7,13 +7,12 @@ import Header from './components/Header.js'
 import Drinks from './components/Drinks.js'
 import Foods from './components/Foods.js'
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
+import { withRouter } from "react-router" //use history for login
 
-function App() {
+function App(props) {
 
 
   const [groups, setGroups] = useState([]);
@@ -29,15 +28,19 @@ function App() {
 
   console.log(groups[0])
 
+  const showTable = () => {
+    props.history.push(`/about`)
+  }
+
 
 
   return (
-    <Router>
+    <>
       <div className="App">
         <Switch>
           <Route exact path="/">
             <Header/>
-            <TablesMap/>
+            <TablesMap showTable = {showTable}/>
           </Route>
           <Route exact path="/About">
             <Header/>
@@ -53,8 +56,8 @@ function App() {
           </Route>
         </Switch>
       </div>
-    </Router>
+    </>
   );
 }
 
-export default App;
+export default withRouter(App);

@@ -6,6 +6,7 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
+import { Link } from 'react-router-dom' 
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,6 +57,7 @@ function TablesMap(props) {
             <GridListTile key={table.id}>
                 {table.group? <h3>{`Table occupied with ${table.group.num_people} people`}</h3>:<h3>Empty</h3>}
               <GridListTileBar
+                onClick = {() => props.showTable()}
                 title={`table: ${table.position}`}
                 actionIcon={
                   <IconButton aria-label={`info about ${table.position}`} className={classes.icon}>
