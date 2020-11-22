@@ -11,6 +11,7 @@ import {
   Route,
 } from "react-router-dom";
 import { withRouter } from "react-router" //use history for login
+import Info from './components/Info.js'
 
 function App(props) {
 
@@ -28,8 +29,8 @@ function App(props) {
 
   console.log(groups[0])
 
-  const showTable = () => {
-    props.history.push(`/about`)
+  const showTable = (table_id) => {
+    props.history.push(`/Info/${table_id}`)
   }
 
 
@@ -54,6 +55,18 @@ function App(props) {
             <Header/>
             <Drinks/>
           </Route>
+          <Route exact path= "/Info/:id"
+          render = {props => {
+            let tableId = props.match.params.id
+            return (
+              <>
+              <Header/>
+              <Info tableId = {tableId}/>
+              </>
+            )
+          }} 
+          />
+    
         </Switch>
       </div>
     </>

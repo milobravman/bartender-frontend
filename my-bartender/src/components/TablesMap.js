@@ -57,7 +57,7 @@ function TablesMap(props) {
             <GridListTile key={table.id}>
                 {table.group? <h3>{`Table occupied with ${table.group.num_people} people`}</h3>:<h3>Empty</h3>}
               <GridListTileBar
-                onClick = {() => props.showTable()}
+                onClick = {() => props.showTable(table.id)}
                 title={`table: ${table.position}`}
                 actionIcon={
                   <IconButton aria-label={`info about ${table.position}`} className={classes.icon}>
