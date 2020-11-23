@@ -48,25 +48,34 @@ function TablesMap(props) {
         //         return <li key = {table.id}>{table.position}</li>
         //     })}
         // </ul>
-        <div className={classes.root}>
+      <div className={classes.root}>
         <GridList cellHeight={180} className={classes.gridList}>
           <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-            <ListSubheader component="div">Table Overview</ListSubheader>
+            <ListSubheader component="div">
+              Table Overview
+            </ListSubheader>
           </GridListTile>
-          {tables.map((table) => (
-            <GridListTile key={table.id}>
-                {table.group? <h3>{`Table occupied with ${table.group.num_people} people`}</h3>:<h3>Empty</h3>}
-              <GridListTileBar
-                onClick = {() => props.showTable(table.id)}
-                title={`table: ${table.position}`}
-                actionIcon={
-                  <IconButton aria-label={`info about ${table.position}`} className={classes.icon}>
-                    <InfoIcon />
-                  </IconButton>
-                }
-              />
-            </GridListTile>
-          ))}
+
+            {tables.map((table) => (
+              <GridListTile key={table.id}>
+                  {table.group?
+                    <h3>
+                      {`Table occupied with ${table.group.num_people} people`}
+                    </h3>:
+                    <h3>
+                      Empty
+                    </h3>
+                  }
+                    <GridListTileBar
+                      onClick = {() => props.showTable(table.id)}
+                      title={`table: ${table.position}`}
+                      actionIcon={
+                      <IconButton 
+                        aria-label={`info about ${table.position}`} 
+                        className={classes.icon}>
+                        <InfoIcon />
+                      </IconButton>}/>
+            </GridListTile>))}
         </GridList>
       </div>
     );

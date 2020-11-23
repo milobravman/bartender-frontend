@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import { grey } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,10 +17,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
+    backgroundColor: "#D3D3D3",
   },
-  paperDiv:{
-    flexGrow: 1,
-  },
+
 }));
 
 
@@ -30,6 +30,7 @@ function Info(props) {
 
     const [table, setTable] = useState([]);
     const [groupSize, setSize] = useState([])
+    const [group, setGroup] = useState([])
 
     useEffect(()=> {
         fetch(`http://localhost:3000/tables/${props.tableId}`,{
@@ -58,18 +59,41 @@ function Info(props) {
         .then(res => console.log(res))
     }
 
+    const fetchGroup = () => {
+        fetch(`http://localhost:3000/groups`,{
+            method: "get",
+            mode: 'cors',
+            headers: {'Content-Type': 'application/json'}
+          }).then(data => data.json())
+          .then(data => setGroup(data))
+
+          console.log(group)
+        }
+
     return (
         <div>
             {table.group? 
             <h4>Table {table.id} has a group with {table.group.num_people} at it</h4>:
             <h3>Table {table.id}</h3>}
             {table.group?
+            
             <div className = {classes.paperDiv}>
-                <Grid item xs={5}>
-                    <Paper className={classes.paper}>xs=6</Paper>
+                {() => fetchGroup()}
+                <Grid container spacing={3}>
+                <Grid item xs={6} className = {classes.paperDiv}>
+                    <Paper className={classes.paper}>
+                        <h5>Food</h5>
+                        <ul>
+                        </ul>
+                    </Paper>
                 </Grid>
-                <Grid item xs={5}>
-                    <Paper className={classes.paper}>xs=6</Paper>
+                <Grid item xs={6}>
+                    <Paper className={classes.paper}>
+                        <h5>Drinks</h5>
+                        <ul>
+                        </ul>
+                    </Paper>
+                </Grid>
                 </Grid>
             </div>:
             <>
