@@ -15,20 +15,6 @@ import Info from './components/Info.js'
 
 function App(props) {
 
-
-  const [groups, setGroups] = useState([]);
-
-  useEffect(()=> {
-    fetch("http://localhost:3000/groups",{
-      method: "get",
-      mode: 'cors',
-      headers: {'Content-Type': 'application/json'}
-    }).then(data => data.json())
-    .then(data => setGroups(data))
-  }, [])
-
-  console.log(groups[0])
-
   const showTable = (table_id) => {
     props.history.push(`/Info/${table_id}`)
   }
@@ -61,7 +47,7 @@ function App(props) {
             return (
               <>
               <Header/>
-              <Info tableId = {tableId}/>
+              <Info tableId = {tableId} showTable = {showTable}/>
               </>
             )
           }} 
