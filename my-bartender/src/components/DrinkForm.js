@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FoodForm(props) {
+export default function DrinkForm(props) {
   const classes = useStyles();
   const [foodId, setFoodId] = useState('');
 

@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import FoodForm from './FoodForm.js'
+import DrinkForm from './FoodForm.js'
 import Drinks from './Drinks.js';
 
 
@@ -50,8 +51,8 @@ function WithFood(props) {
         setDMenu(!drinkMenu)
       }
 
-      const [foodMenu, setFMenu] = useState(true)
-      const [drinkMenu, setDMenu] = useState(true)
+      const [foodMenu, setFMenu] = useState(false)
+      const [drinkMenu, setDMenu] = useState(false)
 
       
 
@@ -100,7 +101,7 @@ function WithFood(props) {
                           Add Drink
                     </Button>
                     {drinkMenu === true?
-                      <Drinks/>
+                      <DrinkForm/>
                     :null}
                 </Paper>
             </Grid>
