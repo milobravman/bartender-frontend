@@ -2,6 +2,9 @@ import React, {useEffect, useState} from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import FoodForm from './FoodForm.js'
+import Drinks from './Drinks.js';
 
 
 
@@ -18,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.text.secondary,
       backgroundColor: "#D3D3D3",
     },
+    button: {
+      
+    }
   
   }));
 
@@ -33,11 +39,19 @@ function WithFood(props) {
           headers: {'Content-Type': 'application/json'}
         }).then(data => data.json())
         .then(data => setGroup(data))
-      },[])
+      },[props.groupId])
 
-      console.log(group.foods)
+    
 
+      const showFoods = () => {
+        setFMenu(!foodMenu)
+      }
+      const showDrinks = () => {
+        setDMenu(!drinkMenu)
+      }
 
+      const [foodMenu, setFMenu] = useState(true)
+      const [drinkMenu, setDMenu] = useState(true)
 
       
 
@@ -52,8 +66,20 @@ function WithFood(props) {
                         {group.foods? group.foods.map((food,index) => (
                             <li key = {index}>{food.name}</li>
                         )) :null}
-                      
+
                     </ul>
+                    <Button 
+                        style = {{
+                          backgroundColor: "#03cffc",
+                          marginLeft: "80%"
+                        }}
+                        onClick = {() => {showFoods()}}
+                    >
+                          Add Food
+                    </Button>
+                    {foodMenu === true?
+                      <FoodForm groupId = {props.groupId}/>
+                    :null}
                 </Paper>
             </Grid>
             <Grid item xs={6}>
@@ -64,6 +90,18 @@ function WithFood(props) {
                             <li key = {index}>{drinks.name}</li>
                         )) :null}
                     </ul>
+                    <Button 
+                        style = {{
+                          backgroundColor: "#03cffc",
+                          marginLeft: "80%"
+                        }}
+                        onClick = {() => {showDrinks()}}
+                    >
+                          Add Drink
+                    </Button>
+                    {drinkMenu === true?
+                      <Drinks/>
+                    :null}
                 </Paper>
             </Grid>
         </Grid>
