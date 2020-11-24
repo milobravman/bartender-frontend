@@ -6,7 +6,7 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
-import { Link } from 'react-router-dom' 
+// import { Link } from 'react-router-dom' 
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,7 +41,6 @@ function TablesMap(props) {
       .then(data => setTables(data))
     }, [])
 
-    console.log(tables)
     return (
         // <ul>
         //     {tables.map(table => {
