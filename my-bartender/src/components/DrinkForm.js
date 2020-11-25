@@ -49,30 +49,30 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DrinkForm(props) {
   const classes = useStyles();
-  const [foodId, setFoodId] = useState('');
+  const [drinkId, setDrinkId] = useState('');
 
   const handleChange = (event) => {
-    setFoodId(event.target.value);
+    setDrinkId(event.target.value);
     
   };
 
-  const [foods, setFoods] = useState([]);
+  const [drinks, setDrinks] = useState([]);
 
   useEffect(()=> {
-    fetch("http://localhost:3000/foods",{
+    fetch("http://localhost:3000/drinks",{
       method: "get",
       mode: 'cors',
       headers: {'Content-Type': 'application/json'}
     }).then(data => data.json())
-    .then(data => setFoods(data))
+    .then(data => setDrinks(data))
   }, [])
 
-  const addFood = (id) => {
+  const addDrink = (id) => {
       let order = {
           group_id: props.groupId,
-          food_id: parseInt(id)
+          drink_id: parseInt(id)
       }
-      fetch(`http://localhost:3000/food_groups/`, {
+      fetch(`http://localhost:3000/drink_groups/`, {
         method: "post",
         mode: 'cors',
         headers:{'Content-Type': 'application/json'},
@@ -90,8 +90,8 @@ export default function DrinkForm(props) {
           input={<BootstrapInput />}
         >
           <option aria-label="None" value="" />  
-          {foods.map(food => (
-              <option key = {food.id} value = {food.id}>{food.name}</option>
+          {drinks.map(drink => (
+              <option key = {drink.id} value = {drink.id}>{drink.name}</option>
           ))}
         </NativeSelect>
         <Button
@@ -100,7 +100,7 @@ export default function DrinkForm(props) {
                 backgroundColor: "#03cffc",
                 marginTop: "1%"
             }}
-            onClick = {() =>addFood(foodId)}
+            onClick = {() =>addDrink(drinkId)}
         >
             Add to order
         </Button>

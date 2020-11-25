@@ -4,8 +4,8 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import FoodForm from './FoodForm.js'
-import DrinkForm from './FoodForm.js'
-import Drinks from './Drinks.js';
+import DrinkForm from './DrinkForm.js'
+
 
 
 
@@ -101,7 +101,7 @@ function WithFood(props) {
                           Add Drink
                     </Button>
                     {drinkMenu === true?
-                      <DrinkForm/>
+                      <DrinkForm groupId = {props.groupId}/>
                     :null}
                 </Paper>
             </Grid>
