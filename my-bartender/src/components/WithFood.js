@@ -6,9 +6,6 @@ import Button from '@material-ui/core/Button';
 import FoodForm from './FoodForm.js'
 import DrinkForm from './DrinkForm.js'
 
-
-
-
 const useStyles = makeStyles((theme) => ({
     root: {
       '& > *': {
@@ -42,7 +39,17 @@ function WithFood(props) {
         .then(data => setGroup(data))
       },[props.groupId])
 
-    
+      const updateGroup = () => {
+        fetch(`http://localhost:3000/groups/${props.groupId}`,{
+          method: "get",
+          mode: 'cors',
+          headers: {'Content-Type': 'application/json'}
+        }).then(data => data.json())
+        .then(data => {
+          setGroup(data)
+          console.log(group.foods)
+        })
+      }
 
       const showFoods = () => {
         setFMenu(!foodMenu)
@@ -55,7 +62,16 @@ function WithFood(props) {
       const [drinkMenu, setDMenu] = useState(false)
 
       
-
+      const calcFood$ = () => {
+        let FoodPrice = 0
+        group.foods.map(food => FoodPrice+=food.price)
+        return (<p>{FoodPrice}$</p>)
+      }
+      const calcDrink$ = () => {
+        let DrinkPrice = 0
+        group.drinks.map(drink => DrinkPrice+=drink.price)
+        return (<p>{DrinkPrice}$</p>)
+      }
 
     return (
      <div className = {classes.paperDiv}>
@@ -65,10 +81,13 @@ function WithFood(props) {
                     <h5>Food</h5>
                     <ul style = {{listStyleType: "none"}}>
                         {group.foods? group.foods.map((food,index) => (
-                            <li key = {index}>{food.name}</li>
+                            <li key = {index}>{food.name}, price: {food.price}</li>
                         )) :null}
 
                     </ul>
+                    <p>
+                      {group.foods? calcFood$(): null}
+                    </p>
                     <Button 
                         style = {{
                           backgroundColor: "#03cffc",
@@ -79,18 +98,27 @@ function WithFood(props) {
                           Add Food
                     </Button>
                     {foodMenu === true?
-                      <FoodForm groupId = {props.groupId}/>
+                      <FoodForm 
+                        groupId = {props.groupId} 
+                        updateGroup = {updateGroup}
+                      />
                     :null}
                 </Paper>
             </Grid>
             <Grid item xs={6}>
                 <Paper className={classes.paper}>
                     <h5>Drinks</h5>
-                    <ul style = {{listStyleType: "none"}}>
-                        {group.drinks? group.drinks.map((drinks,index) => (
-                            <li key = {index}>{drinks.name}</li>
+                    <ul style = {{
+                        listStyleType: "none",
+                        textAlign: "center"
+                      }}>
+                        {group.drinks? group.drinks.map((drink,index) => (
+                            <li key = {index}>{drink.name}, price:{drink.price}</li>
                         )) :null}
                     </ul>
+                    <p>
+                      {group.drinks? calcDrink$(): null}
+                    </p>
                     <Button 
                         style = {{
                           backgroundColor: "#03cffc",
@@ -101,7 +129,10 @@ function WithFood(props) {
                           Add Drink
                     </Button>
                     {drinkMenu === true?
-                      <DrinkForm groupId = {props.groupId}/>
+                      <DrinkForm 
+                        groupId = {props.groupId}
+                        updateGroup = {updateGroup}
+                      />
                     :null}
                 </Paper>
             </Grid>

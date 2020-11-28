@@ -18,6 +18,9 @@ function App(props) {
   const showTable = (table_id) => {
     props.history.push(`/Info/${table_id}`)
   }
+  const showTables = () => {
+    props.history.push(`/`)
+  }
 
 
 
@@ -47,7 +50,11 @@ function App(props) {
             return (
               <>
               <Header/>
-              <Info tableId = {tableId} showTable = {showTable}/>
+              <Info 
+                tableId = {tableId} 
+                showTable = {showTable}
+                showTables = {showTables}
+                />
               </>
             )
           }} 

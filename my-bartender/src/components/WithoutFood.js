@@ -39,7 +39,7 @@ function WithoutFood(props) {
             <Button type ="submit" variant="contained" 
                     onClick= {() => {
                         props.handleSubmit()
-                        // props.showTable()
+                        props.showTables()
                         }}>
                 Add a new Group
             </Button>
