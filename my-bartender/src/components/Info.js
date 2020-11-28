@@ -1,30 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import WithFood from './WithFood'
 import WithoutFood from './WithoutFood'
 import Button from '@material-ui/core/Button';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '25ch',
-    },
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-    backgroundColor: "#D3D3D3",
-  },
 
-}));
 
 
 
 function Info(props) {
-
-    const classes = useStyles();
 
     const [table, setTable] = useState([]);
     const [groupSize, setSize] = useState([])
@@ -39,6 +22,20 @@ function Info(props) {
         .then(data => setTable(data))
       },[props.tableId])
 
+    const updateGroup = () => {
+        fetch(`http://localhost:3000/tables/${props.tableId}`,{
+            method: "get",
+            mode: 'cors',
+            headers: {'Content-Type': 'application/json'}
+          }).then(data => data.json())
+          .then(data => {
+              setTable(data)
+              console.log(table)
+            })
+            console.log("hi")
+    }
+
+    
     const handleChange = (event) =>{
         setSize({size: event.target.value})
     }
@@ -61,7 +58,7 @@ function Info(props) {
         method: 'DELETE',
         })
         .then(res => res.text()) // or res.json()
-        .then(res => console.log(res))
+        .then(res => updateGroup())
     }
 
 
@@ -76,7 +73,9 @@ function Info(props) {
                     <Button 
                         variant="contained"
                         style = {{marginBottom: "5px"}}
-                        onClick = {() => deleteGroup(table.group.id)}
+                        onClick = {() => {
+                            deleteGroup(table.group.id)
+                        }}
                         >
                             Group done?
                         
@@ -93,6 +92,7 @@ function Info(props) {
 
                 <WithoutFood
                     showTable = {props.showTable}
+                    showTables = {props.showTables}
                     handleSubmit = {handleSubmit}
                     handleChange = {handleChange}
                 />

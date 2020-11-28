@@ -77,8 +77,7 @@ export default function DrinkForm(props) {
         mode: 'cors',
         headers:{'Content-Type': 'application/json'},
         body: JSON.stringify(order)
-      })
-
+      }).then(props.updateGroup())
   }
   return (
     <div>

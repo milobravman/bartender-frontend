@@ -53,7 +53,6 @@ export default function FoodForm(props) {
 
   const handleChange = (event) => {
     setFoodId(event.target.value);
-    
   };
 
   const [foods, setFoods] = useState([]);
@@ -72,13 +71,16 @@ export default function FoodForm(props) {
           group_id: props.groupId,
           food_id: parseInt(id)
       }
+      console.log(order)
       fetch(`http://localhost:3000/food_groups/`, {
         method: "post",
         mode: 'cors',
         headers:{'Content-Type': 'application/json'},
         body: JSON.stringify(order)
       })
-
+      props.updateGroup()
+ 
+      
   }
   return (
     <div>
@@ -86,7 +88,7 @@ export default function FoodForm(props) {
         <InputLabel htmlFor="demo-customized-select-native">Age</InputLabel>
         <NativeSelect
           id="demo-customized-select-native"
-          onChange={handleChange}
+          onChange={(e) => handleChange(e)}
           input={<BootstrapInput />}
         >
           <option aria-label="None" value="" />  
