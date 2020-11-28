@@ -47,9 +47,27 @@ function WithFood(props) {
         }).then(data => data.json())
         .then(data => {
           setGroup(data)
-          console.log(group.foods)
         })
       }
+
+
+      // function resolveAfter2Seconds() {
+      //   return new Promise(resolve => {
+      //       resolve('resolved');
+        
+      //   });
+      // }
+      
+      // async function asyncCall() {
+      //   console.log('calling');
+      //   const result = await resolveAfter2Seconds();
+      //   console.log(result);
+      //   // expected output: "resolved"
+      // }
+      
+      // asyncCall();
+
+
 
       const showFoods = () => {
         setFMenu(!foodMenu)

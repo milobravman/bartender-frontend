@@ -30,9 +30,7 @@ function Info(props) {
           }).then(data => data.json())
           .then(data => {
               setTable(data)
-              console.log(table)
             })
-            console.log("hi")
     }
 
     

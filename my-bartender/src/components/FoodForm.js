@@ -78,10 +78,11 @@ export default function FoodForm(props) {
         headers:{'Content-Type': 'application/json'},
         body: JSON.stringify(order)
       })
-      props.updateGroup()
- 
-      
+      .then(r => 
+        props.updateGroup()
+      )     
   }
+
   return (
     <div>
       <FormControl className={classes.margin}>
