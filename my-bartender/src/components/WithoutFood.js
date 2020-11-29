@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
@@ -39,7 +39,6 @@ function WithoutFood(props) {
             <Button type ="submit" variant="contained" 
                     onClick= {() => {
                         props.handleSubmit()
-                        props.showTables()
                         }}>
                 Add a new Group
             </Button>

@@ -22,7 +22,7 @@ function Info(props) {
         .then(data => setTable(data))
       },[props.tableId])
 
-    const updateGroup = () => {
+    const updateTable = () => {
         fetch(`http://localhost:3000/tables/${props.tableId}`,{
             method: "get",
             mode: 'cors',
@@ -47,8 +47,8 @@ function Info(props) {
             mode: 'cors',
             headers:{'Content-Type': 'application/json'},
             body: JSON.stringify(group)
-        }).then(response => response.json())
-        .then(res => console.log(res))
+        }).then(response => updateTable())
+        
     }
 
     const deleteGroup = (id) => {
@@ -56,7 +56,7 @@ function Info(props) {
         method: 'DELETE',
         })
         .then(res => res.text()) // or res.json()
-        .then(res => updateGroup())
+        .then(res => props.showTables())
     }
 
 
@@ -91,6 +91,7 @@ function Info(props) {
                 <WithoutFood
                     showTable = {props.showTable}
                     showTables = {props.showTables}
+                    updateTable = {updateTable}
                     handleSubmit = {handleSubmit}
                     handleChange = {handleChange}
                 />
