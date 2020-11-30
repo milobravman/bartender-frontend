@@ -71,8 +71,7 @@ export default function FoodForm(props) {
           group_id: props.groupId,
           food_id: parseInt(id)
       }
-      console.log(order)
-      fetch(`http://localhost:3000/food_groups/`, {
+       fetch(`http://localhost:3000/food_groups/`, {
         method: "post",
         mode: 'cors',
         headers:{'Content-Type': 'application/json'},
