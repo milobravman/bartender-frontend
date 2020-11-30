@@ -23,6 +23,11 @@ function App(props) {
   }
 
 
+  const [foodOrdered, setFoodOrdered] = useState(null)
+  const [foodDelivered, setFoodDelivered] = useState(null)
+  const [drinkOrdered, setDrinkOrdered] = useState(null)
+  const [drinkDelivered, setDrinkDelivered] = useState(null)
+
 
   return (
     <>
@@ -30,7 +35,13 @@ function App(props) {
         <Switch>
           <Route exact path="/">
             <Header/>
-            <TablesMap showTable = {showTable}/>
+            <TablesMap 
+              showTable = {showTable}
+              foodDelivered = {foodDelivered}
+              foodOrdered = {foodOrdered}
+              drinkDelivered = {drinkDelivered}
+              drinkOrdered = {drinkOrdered}
+            />
           </Route>
           <Route exact path="/About">
             <Header/>
@@ -54,6 +65,14 @@ function App(props) {
                 tableId = {tableId} 
                 showTable = {showTable}
                 showTables = {showTables}
+                foodDelivered = {foodDelivered}
+                foodOrdered = {foodOrdered}
+                drinkDelivered = {drinkDelivered}
+                drinkOrdered = {drinkOrdered}
+                setFoodDelivered = {setFoodDelivered}
+                setFoodOrdered = {setFoodOrdered}
+                setDrinkDelivered = {setDrinkDelivered}
+                setDrinkOrdered = {setDrinkOrdered}
                 />
               </>
             )

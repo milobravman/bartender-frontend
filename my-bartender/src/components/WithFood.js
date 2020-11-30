@@ -19,8 +19,11 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.text.secondary,
       backgroundColor: "#D3D3D3",
     },
-    button: {
-      
+    status: {
+      border: "solid #000",
+      borderWidth: "1px",
+      listStyleType: "none",
+      padding: "0",
     }
   
   }));
@@ -36,7 +39,11 @@ function WithFood(props) {
           mode: 'cors',
           headers: {'Content-Type': 'application/json'}
         }).then(data => data.json())
-        .then(data => setGroup(data))
+        .then(data => {
+          setGroup(data)
+          props.setFoodOrdered(data.foods)
+          props.setDrinkOrdered(data.drinks)
+        })
       },[props.groupId])
 
       const updateGroup = () => {
@@ -47,27 +54,10 @@ function WithFood(props) {
         }).then(data => data.json())
         .then(data => {
           setGroup(data)
+          props.setFoodOrdered(data.foods)
+          props.setDrinkDelivered(data.drinks)
         })
       }
-
-
-      // function resolveAfter2Seconds() {
-      //   return new Promise(resolve => {
-      //       resolve('resolved');
-        
-      //   });
-      // }
-      
-      // async function asyncCall() {
-      //   console.log('calling');
-      //   const result = await resolveAfter2Seconds();
-      //   console.log(result);
-      //   // expected output: "resolved"
-      // }
-      
-      // asyncCall();
-
-
 
       const showFoods = () => {
         setFMenu(!foodMenu)
@@ -83,26 +73,69 @@ function WithFood(props) {
       const calcFood$ = () => {
         let FoodPrice = 0
         group.foods.map(food => FoodPrice+=food.price)
+        props.setFoodsPrice(FoodPrice)
         return (<p>{FoodPrice}$</p>)
       }
       const calcDrink$ = () => {
         let DrinkPrice = 0
         group.drinks.map(drink => DrinkPrice+=drink.price)
+        props.setDrinksPrice(DrinkPrice)
         return (<p>{DrinkPrice}$</p>)
       }
 
+      const addToDeliverd = (target) => {
+        if (props.foodDelivered === null) {
+          props.setFoodDelivered([target])
+        }
+        else {
+          props.setFoodDelivered([...props.foodDelivered,target])
+        }
+        //removeFromOrdered(target)
+
+      }
+
+      const addToDrinkDeliverd = (target) => {
+        if (props.drinkDelivered === null) {
+          props.setDrinkDelivered([target])
+        }
+        else {
+          props.setDrinkDelivered([...props.drinkDelivered,target])
+        }
+      }
+
+      const removeFromOrdered = (target) => {
+        let updated = props.foodOrdered.map(food => {
+          if (food.id != target.id) {
+            return food
+          }
+        })
+        props.setFoodOrdered(updated)
+      }
     return (
      <div className = {classes.paperDiv}>
         <Grid container spacing={3}>
             <Grid item xs={6} className = {classes.paperDiv}>
                 <Paper className={classes.paper}>
                     <h5>Food</h5>
-                    <ul style = {{listStyleType: "none"}}>
-                        {group.foods? group.foods.map((food,index) => (
-                            <li key = {index}>{food.name}, price: {food.price}</li>
-                        )) :null}
 
-                    </ul>
+                    <div id = "Group" style = {{display: "flex", flexDirection: "row", justifyContent: "center"}}>
+                      <div id = "Ordered" style = {{marginRight: "8%", width: "35%"}}>
+                        <h6 style = {{marginBottom: "0px", marginTop: "0px"}}>Ordered</h6>
+                        <ul className = {classes.status}>
+                            {props.foodOrdered? props.foodOrdered.map((food,index) => (
+                                <li onClick = {() => addToDeliverd(food)} key = {index}>{food.name}, price: {food.price}</li>
+                            )) :null}
+                        </ul>
+                      </div>
+                      <div id = "Delivered" style = {{marginLeft: "8%", width: "35%"}}>
+                        <h6 style = {{marginBottom: "0px", marginTop: "0px"}}>Delivered</h6>
+                        <ul className = {classes.status}>
+                          {props.foodDelivered? props.foodDelivered.map((food,index) => (
+                                <li key = {index}>{food.name}, price: {food.price}</li>
+                            )) :null}
+                        </ul>
+                      </div>
+                    </div>
                     <p>
                       {group.foods? calcFood$(): null}
                     </p>
@@ -126,14 +159,24 @@ function WithFood(props) {
             <Grid item xs={6}>
                 <Paper className={classes.paper}>
                     <h5>Drinks</h5>
-                    <ul style = {{
-                        listStyleType: "none",
-                        textAlign: "center"
-                      }}>
-                        {group.drinks? group.drinks.map((drink,index) => (
-                            <li key = {index}>{drink.name}, price:{drink.price}</li>
-                        )) :null}
-                    </ul>
+                    <div id = "Group" style = {{display: "flex", flexDirection: "row", justifyContent: "center"}}>
+                      <div id = "Ordered" style = {{marginRight: "8%", width: "35%"}}>
+                        <h6 style = {{marginBottom: "0px", marginTop: "0px"}}>Ordered</h6>
+                        <ul className = {classes.status}>
+                            {props.drinkOrdered? props.drinkOrdered.map((drink,index) => (
+                                <li onClick = {() => addToDrinkDeliverd(drink)} key = {index}>{drink.name}, price: {drink.price}</li>
+                            )) :null}
+                        </ul>
+                      </div>
+                      <div id = "Delivered" style = {{marginLeft: "8%", width: "35%"}}>
+                        <h6 style = {{marginBottom: "0px", marginTop: "0px"}}>Delivered</h6>
+                        <ul className = {classes.status}>
+                          {props.drinkDelivered? props.drinkDelivered.map((drink,index) => (
+                                <li key = {index}>{drink.name}, price: {drink.price}</li>
+                            )) :null}
+                        </ul>
+                      </div>
+                    </div>
                     <p>
                       {group.drinks? calcDrink$(): null}
                     </p>

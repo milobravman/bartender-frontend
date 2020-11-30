@@ -11,6 +11,8 @@ function Info(props) {
 
     const [table, setTable] = useState([]);
     const [groupSize, setSize] = useState([])
+    const [foodsPrice, setFoodsPrice] = useState('')
+    const [drinksPrice, setDrinksPrice] = useState('')
    
 
     useEffect(()=> {
@@ -66,8 +68,9 @@ function Info(props) {
             {table.group? 
                 <>
                     <h4>
-                        Table {table.id} has a group with {table.group.num_people} at it
+                        Table {table.id} has a group with {table.group.num_people} people at it
                     </h4>
+                    <p>Total price: {foodsPrice+drinksPrice}$</p>
                     <Button 
                         variant="contained"
                         style = {{marginBottom: "5px"}}
@@ -75,16 +78,25 @@ function Info(props) {
                             deleteGroup(table.group.id)
                         }}
                         >
-                            Group done?
-                        
+                            Close Group
                     </Button>
                 </>
             :
                 <h3>Table {table.id}</h3>}
             {table.group?
                 <WithFood 
+                    setDrinksPrice = {setDrinksPrice}
+                    setFoodsPrice = {setFoodsPrice}
                     groupId ={table.group.id} 
                     deleteGroup={deleteGroup}
+                    foodDelivered = {props.foodDelivered}
+                    foodOrdered = {props.foodOrdered}
+                    drinkDelivered = {props.drinkDelivered}
+                    drinkOrdered = {props.drinkOrdered}
+                    setFoodDelivered = {props.setFoodDelivered}
+                    setFoodOrdered = {props.setFoodOrdered}
+                    setDrinkDelivered = {props.setDrinkDelivered}
+                    setDrinkOrdered = {props.setDrinkOrdered}
                 />
             :
 
