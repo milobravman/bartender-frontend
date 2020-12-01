@@ -23,7 +23,15 @@ function App(props) {
   }
 
 
-  const [foodOrdered, setFoodOrdered] = useState(null)
+
+  //fetch groups
+  //goups 
+  //  food
+  // drinks
+  //
+
+
+  const [foodOrdered, setFoodOrdered] = useState([{73: []}])
   const [foodDelivered, setFoodDelivered] = useState(null)
   const [drinkOrdered, setDrinkOrdered] = useState(null)
   const [drinkDelivered, setDrinkDelivered] = useState(null)
