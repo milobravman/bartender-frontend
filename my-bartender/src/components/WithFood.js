@@ -51,7 +51,7 @@ function WithFood(props) {
           setFoodOrdered(data.foods)
           setDrinkOrdered(data.drinks)
           let position = props.tablePosition
-          if (props.foodOrdered.position != null){
+          if (props.foodOrdered != null){
             setFoodOrdered(props.foodOrdered)
           }
         })
