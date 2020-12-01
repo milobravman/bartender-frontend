@@ -29,9 +29,16 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function WithFood(props) {
+  
 
+
+    const [Delivered, setDelivered] = useState(null)
     const [group, setGroup] = useState([])
     const classes = useStyles();
+    const [foodOrdered, setFoodOrdered] = useState(null)
+    // const [foodDelivered, setFoodDelivered] = useState(null)
+    const [drinkOrdered, setDrinkOrdered] = useState(null)
+    const [drinkDelivered, setDrinkDelivered] = useState(null)
 
     useEffect(()=> {
         fetch(`http://localhost:3000/groups/${props.groupId}`,{
@@ -41,10 +48,14 @@ function WithFood(props) {
         }).then(data => data.json())
         .then(data => {
           setGroup(data)
-          props.setFoodOrdered(data.foods)
-          props.setDrinkOrdered(data.drinks)
+          setFoodOrdered(data.foods)
+          setDrinkOrdered(data.drinks)
+          let position = props.tablePosition
+          if (props.foodOrdered.position != null){
+            setFoodOrdered(props.foodOrdered)
+          }
         })
-      },[props.groupId])
+      },[props.groupId, props.tablePosition])
 
       const updateGroup = () => {
         fetch(`http://localhost:3000/groups/${props.groupId}`,{
@@ -54,8 +65,8 @@ function WithFood(props) {
         }).then(data => data.json())
         .then(data => {
           setGroup(data)
-          props.setFoodOrdered(data.foods)
-          props.setDrinkDelivered(data.drinks)
+          setFoodOrdered(data.foods)
+          setDrinkDelivered(data.drinks)
         })
       }
 
@@ -90,27 +101,42 @@ function WithFood(props) {
         else {
           props.setFoodDelivered([...props.foodDelivered,target])
         }
-        //removeFromOrdered(target)
+        removeFromOrderedFood(target)
+        setDelivered(true)
 
       }
 
       const addToDrinkDeliverd = (target) => {
-        if (props.drinkDelivered === null) {
-          props.setDrinkDelivered([target])
+        if (drinkDelivered === null) {
+          setDrinkDelivered([target])
         }
         else {
-          props.setDrinkDelivered([...props.drinkDelivered,target])
+          setDrinkDelivered([...drinkDelivered,target])
         }
+        removeFromOrderedDrink(target)
+        setDelivered(true)
       }
 
-      const removeFromOrdered = (target) => {
-        let updated = props.foodOrdered.map(food => {
-          if (food.id != target.id) {
+      const removeFromOrderedFood = (target) => {
+        let updated = foodOrdered.filter(food => {
+          if (food.id !== target.id) {
             return food
           }
         })
         props.setFoodOrdered(updated)
+        setFoodOrdered(updated)
       }
+
+      const removeFromOrderedDrink = (target) => {
+        let updated = drinkOrdered.filter(drink => {
+          if (drink.id !== target.id) {
+            return drink
+          }
+        })
+        props.setDrinkOrdered(updated)
+        setDrinkOrdered(updated)
+      }
+
     return (
      <div className = {classes.paperDiv}>
         <Grid container spacing={3}>
@@ -121,8 +147,10 @@ function WithFood(props) {
                     <div id = "Group" style = {{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                       <div id = "Ordered" style = {{marginRight: "8%", width: "35%"}}>
                         <h6 style = {{marginBottom: "0px", marginTop: "0px"}}>Ordered</h6>
+
+
                         <ul className = {classes.status}>
-                            {props.foodOrdered? props.foodOrdered.map((food,index) => (
+                            {foodOrdered? foodOrdered.map((food,index) => (
                                 <li onClick = {() => addToDeliverd(food)} key = {index}>{food.name}, price: {food.price}</li>
                             )) :null}
                         </ul>
@@ -163,7 +191,7 @@ function WithFood(props) {
                       <div id = "Ordered" style = {{marginRight: "8%", width: "35%"}}>
                         <h6 style = {{marginBottom: "0px", marginTop: "0px"}}>Ordered</h6>
                         <ul className = {classes.status}>
-                            {props.drinkOrdered? props.drinkOrdered.map((drink,index) => (
+                            {drinkOrdered? drinkOrdered.map((drink,index) => (
                                 <li onClick = {() => addToDrinkDeliverd(drink)} key = {index}>{drink.name}, price: {drink.price}</li>
                             )) :null}
                         </ul>
@@ -171,7 +199,7 @@ function WithFood(props) {
                       <div id = "Delivered" style = {{marginLeft: "8%", width: "35%"}}>
                         <h6 style = {{marginBottom: "0px", marginTop: "0px"}}>Delivered</h6>
                         <ul className = {classes.status}>
-                          {props.drinkDelivered? props.drinkDelivered.map((drink,index) => (
+                          {drinkDelivered? drinkDelivered.map((drink,index) => (
                                 <li key = {index}>{drink.name}, price: {drink.price}</li>
                             )) :null}
                         </ul>

@@ -23,7 +23,14 @@ function App(props) {
   }
 
 
-  const [foodOrdered, setFoodOrdered] = useState(null)
+  const [foodOrdered, setFoodOrdered] = useState([
+    {1: null},
+    {2: null},
+    {3: null},
+    {4: null},
+    {5: null},
+    {6: null}
+  ])
   const [foodDelivered, setFoodDelivered] = useState(null)
   const [drinkOrdered, setDrinkOrdered] = useState(null)
   const [drinkDelivered, setDrinkDelivered] = useState(null)
@@ -61,7 +68,7 @@ function App(props) {
             return (
               <>
               <Header/>
-              <Info 
+              <Info
                 tableId = {tableId} 
                 showTable = {showTable}
                 showTables = {showTables}

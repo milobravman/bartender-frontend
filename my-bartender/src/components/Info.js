@@ -85,6 +85,7 @@ function Info(props) {
                 <h3>Table {table.id}</h3>}
             {table.group?
                 <WithFood 
+                    tablePosition = {table.position}
                     setDrinksPrice = {setDrinksPrice}
                     setFoodsPrice = {setFoodsPrice}
                     groupId ={table.group.id} 
