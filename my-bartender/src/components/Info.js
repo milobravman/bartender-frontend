@@ -58,7 +58,8 @@ function Info(props) {
         method: 'DELETE',
         })
         .then(res => res.text()) // or res.json()
-        .then(res => props.showTables())
+        .then(res => {props.showTables() 
+            window.location.reload()})
     }
 
 

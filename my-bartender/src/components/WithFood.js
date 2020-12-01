@@ -55,7 +55,7 @@ function WithFood(props) {
         .then(data => {
           setGroup(data)
           props.setFoodOrdered(data.foods)
-          props.setDrinkDelivered(data.drinks)
+          props.setDrinkOrdered(data.drinks)
         })
       }
 
@@ -90,7 +90,7 @@ function WithFood(props) {
         else {
           props.setFoodDelivered([...props.foodDelivered,target])
         }
-        //removeFromOrdered(target)
+        removeFromOrdered(target)
 
       }
 
@@ -101,15 +101,25 @@ function WithFood(props) {
         else {
           props.setDrinkDelivered([...props.drinkDelivered,target])
         }
+        removeFromOrderedDrinks(target)
       }
 
       const removeFromOrdered = (target) => {
-        let updated = props.foodOrdered.map(food => {
+        let updated = props.foodOrdered.filter(food => {
           if (food.id != target.id) {
             return food
           }
         })
         props.setFoodOrdered(updated)
+      }
+
+      const removeFromOrderedDrinks = (target) => {
+        let updated = props.drinkOrdered.filter(drink => {
+          if (drink.id != target.id) {
+            return drink
+          }
+        })
+        props.setDrinkOrdered(updated)
       }
     return (
      <div className = {classes.paperDiv}>
