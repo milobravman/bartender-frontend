@@ -21,11 +21,12 @@ const useStyles = makeStyles({
   const classes = useStyles();
   return (
     <Paper className={classes.root}>
+      
      
       <Tabs 
       value = {false}
       centered>
-        
+      <h3 id = "header-logo">My-Bartender</h3>
       <Link to='/' >
         <Tab v icon={<HomeIcon/>}/>
       </Link>
