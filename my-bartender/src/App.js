@@ -32,42 +32,42 @@ function App(props) {
 
 
   const [groupsData, setGroupsData] = useState([
-    {id: 73, status: {
+    {id: 73, 
       foodOrdered: null,
       foodDelivered: null,
       drinkDelivered: null,
       drinkOrdered: null
-    }},
-    {id: 74, status: {
+    },
+    {id: 74,
       foodOrdered: null,
       foodDelivered: null,
       drinkDelivered: null,
       drinkOrdered: null
-    }},
-    {id: 75, status: {
+    },
+    {id: 75, 
       foodOrdered: null,
       foodDelivered: null,
       drinkDelivered: null,
       drinkOrdered: null
-    }},
-    {id: 76, status: {
+    },
+    {id: 76, 
       foodOrdered: null,
       foodDelivered: null,
       drinkDelivered: null,
       drinkOrdered: null
-    }},
-    {id: 77, status: {
+    },
+    {id: 77, 
       foodOrdered: null,
       foodDelivered: null,
       drinkDelivered: null,
       drinkOrdered: null
-    }},
-    {id: 78, status: {
+    },
+    {id: 78,
       foodOrdered: null,
       foodDelivered: null,
       drinkDelivered: null,
       drinkOrdered: null
-    }}
+    }
   ])
 
 

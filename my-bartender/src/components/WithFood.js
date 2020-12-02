@@ -50,6 +50,19 @@ function WithFood(props) {
           setGroup(data)
           setFoodOrdered(data.foods)
           setDrinkOrdered(data.drinks)
+          //debugger
+          props.setGroupsData([...props.groupsData].map(obj => {
+            //debugger
+            if (obj.id === props.tableId){
+              return {
+                ...obj,
+                foodOrdered: data.foods,
+                drinkOrdered: data.drinks
+              }
+            }else{
+              return obj
+            }
+          }))
           if (props.foodOrdered != null){
             setFoodOrdered(props.foodOrdered)
           }
@@ -69,6 +82,17 @@ function WithFood(props) {
           setGroup(data)
           setFoodOrdered(data.foods)
           setDrinkOrdered(data.drinks)
+          props.setGroupsData([...props.groupsData.map(group => {
+            if (group.id === props.tableId){
+              return {
+                ...group,
+                foodOrdered: data.foods,
+                drinkOrdered: data.drinks
+              }
+            }else{
+              return group
+            }
+          })])
         })
       }
 
