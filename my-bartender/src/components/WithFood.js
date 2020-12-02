@@ -29,6 +29,8 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function WithFood(props) {
+
+  const tablePosition = props.tablePosition-1
   
 
 
@@ -36,7 +38,7 @@ function WithFood(props) {
     const [group, setGroup] = useState([])
     const classes = useStyles();
     const [foodOrdered, setFoodOrdered] = useState(null)
-    // const [foodDelivered, setFoodDelivered] = useState(null)
+    const [foodDelivered, setFoodDelivered] = useState(null)
     const [drinkOrdered, setDrinkOrdered] = useState(null)
     const [drinkDelivered, setDrinkDelivered] = useState(null)
 
@@ -121,36 +123,68 @@ function WithFood(props) {
       }
 
       const addToDeliverd = (target) => {
-        if (props.foodDelivered === null) {
-          props.setFoodDelivered([target])
-        }
-        else {
-          props.setFoodDelivered([...props.foodDelivered,target])
-        }
+        props.setGroupsData([...props.groupsData.map(obj => {
+          if (obj.id === props.tableId){
+            if (obj.foodDelivered === null) {
+              return {
+                ...obj,
+                foodDelivered: [target]
+              }
+            }else{
+              return{
+                ...obj,
+                foodDelivered: [...obj.foodDelivered, target]
+              }
+            }
+          }else{
+            return obj
+          }
+        })])
         removeFromOrderedFood(target)
         //setDelivered(true)
 
       }
 
       const addToDrinkDeliverd = (target) => {
-        if (drinkDelivered === null) {
-          setDrinkDelivered([target])
-        }
-        else {
-          setDrinkDelivered([...drinkDelivered,target])
-        }
-        removeFromOrderedDrink(target)
+        props.setGroupsData([...props.groupsData.map(obj => {
+          if (obj.id === props.tableId){
+            if (obj.drinkDelivered === null) {
+              return {
+                ...obj,
+                drinkDelivered: [target]
+              }
+            }else{
+              return{
+                ...obj,
+                drinkDelivered: [...obj.drinkDelivered, target]
+              }
+            }
+          }else{
+            return obj
+          }
+        })])
+        //removeFromOrderedDrink(target)
         //setDelivered(true)
       }
 
       const removeFromOrderedFood = (target) => {
-        let updated = foodOrdered.filter(food => {
+        let updated = props.groupsData[tablePosition].foodOrdered.filter(food => {
           if (food.id !== target.id) {
             return food
           }
         })
-        props.setFoodOrdered(updated)
-        setFoodOrdered(updated)
+        
+        props.setGroupsData([...props.groupsData.map(obj => {
+          if (obj.id === props.tableId){
+              return{
+                ...obj,
+                foodOrdered: [updated]
+              }
+          }else{
+            return obj
+          }
+        })])
+        
       }
 
       const removeFromOrderedDrink = (target) => {
@@ -176,7 +210,7 @@ function WithFood(props) {
 
 
                         <ul className = {classes.status}>
-                            {foodOrdered? foodOrdered.map((food,index) => (
+                            {props.groupsData[tablePosition].foodOrdered? props.groupsData[tablePosition].foodOrdered.map((food,index) => (
                                 <li onClick = {() => addToDeliverd(food)} key = {index}>{food.name}, price: {food.price}</li>
                             )) :null}
                         </ul>
@@ -184,7 +218,7 @@ function WithFood(props) {
                       <div id = "Delivered" style = {{marginLeft: "8%", width: "35%"}}>
                         <h6 style = {{marginBottom: "0px", marginTop: "0px"}}>Delivered</h6>
                         <ul className = {classes.status}>
-                          {props.foodDelivered? props.foodDelivered.map((food,index) => (
+                          {props.groupsData[tablePosition].foodDelivered? props.groupsData[tablePosition].foodDelivered.map((food,index) => (
                                 <li key = {index}>{food.name}, price: {food.price}</li>
                             )) :null}
                         </ul>
@@ -225,7 +259,7 @@ function WithFood(props) {
                       <div id = "Delivered" style = {{marginLeft: "8%", width: "35%"}}>
                         <h6 style = {{marginBottom: "0px", marginTop: "0px"}}>Delivered</h6>
                         <ul className = {classes.status}>
-                          {drinkDelivered? drinkDelivered.map((drink,index) => (
+                          {props.groupsData[tablePosition].drinkDelivered? props.groupsData[tablePosition].drinkDelivered.map((drink,index) => (
                                 <li key = {index}>{drink.name}, price: {drink.price}</li>
                             )) :null}
                         </ul>
