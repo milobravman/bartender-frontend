@@ -31,10 +31,45 @@ function App(props) {
   //
 
 
-  const [foodOrdered, setFoodOrdered] = useState([{73: []}])
-  const [foodDelivered, setFoodDelivered] = useState(null)
-  const [drinkOrdered, setDrinkOrdered] = useState(null)
-  const [drinkDelivered, setDrinkDelivered] = useState(null)
+  const [groupsData, setGroupsData] = useState([
+    {id: 73, status: {
+      foodOrdered: null,
+      foodDelivered: null,
+      drinkDelivered: null,
+      drinkOrdered: null
+    }},
+    {id: 74, status: {
+      foodOrdered: null,
+      foodDelivered: null,
+      drinkDelivered: null,
+      drinkOrdered: null
+    }},
+    {id: 75, status: {
+      foodOrdered: null,
+      foodDelivered: null,
+      drinkDelivered: null,
+      drinkOrdered: null
+    }},
+    {id: 76, status: {
+      foodOrdered: null,
+      foodDelivered: null,
+      drinkDelivered: null,
+      drinkOrdered: null
+    }},
+    {id: 77, status: {
+      foodOrdered: null,
+      foodDelivered: null,
+      drinkDelivered: null,
+      drinkOrdered: null
+    }},
+    {id: 78, status: {
+      foodOrdered: null,
+      foodDelivered: null,
+      drinkDelivered: null,
+      drinkOrdered: null
+    }}
+  ])
+
 
 
   return (
@@ -45,10 +80,6 @@ function App(props) {
             <Header/>
             <TablesMap 
               showTable = {showTable}
-              foodDelivered = {foodDelivered}
-              foodOrdered = {foodOrdered}
-              drinkDelivered = {drinkDelivered}
-              drinkOrdered = {drinkOrdered}
             />
           </Route>
           <Route exact path="/About">
@@ -73,14 +104,10 @@ function App(props) {
                 tableId = {tableId} 
                 showTable = {showTable}
                 showTables = {showTables}
-                foodDelivered = {foodDelivered}
-                foodOrdered = {foodOrdered}
-                drinkDelivered = {drinkDelivered}
-                drinkOrdered = {drinkOrdered}
-                setFoodDelivered = {setFoodDelivered}
-                setFoodOrdered = {setFoodOrdered}
-                setDrinkDelivered = {setDrinkDelivered}
-                setDrinkOrdered = {setDrinkOrdered}
+                groupsData = {groupsData}
+                setGroupsData = {setGroupsData}
+
+
                 />
               </>
             )

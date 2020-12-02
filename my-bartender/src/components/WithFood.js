@@ -32,7 +32,7 @@ function WithFood(props) {
   
 
 
-    const [Delivered, setDelivered] = useState(null)
+    //const [Delivered, setDelivered] = useState(null)
     const [group, setGroup] = useState([])
     const classes = useStyles();
     const [foodOrdered, setFoodOrdered] = useState(null)
@@ -40,7 +40,7 @@ function WithFood(props) {
     const [drinkOrdered, setDrinkOrdered] = useState(null)
     const [drinkDelivered, setDrinkDelivered] = useState(null)
 
-    useEffect(()=> {
+    useEffect(() => {
         fetch(`http://localhost:3000/groups/${props.groupId}`,{
           method: "get",
           mode: 'cors',
@@ -50,12 +50,14 @@ function WithFood(props) {
           setGroup(data)
           setFoodOrdered(data.foods)
           setDrinkOrdered(data.drinks)
-          let position = props.tablePosition
           if (props.foodOrdered != null){
             setFoodOrdered(props.foodOrdered)
           }
+
         })
       },[props.groupId, props.tablePosition])
+
+
 
       const updateGroup = () => {
         fetch(`http://localhost:3000/groups/${props.groupId}`,{
@@ -66,7 +68,7 @@ function WithFood(props) {
         .then(data => {
           setGroup(data)
           setFoodOrdered(data.foods)
-          setDrinkDelivered(data.drinks)
+          setDrinkOrdered(data.drinks)
         })
       }
 
@@ -102,7 +104,7 @@ function WithFood(props) {
           props.setFoodDelivered([...props.foodDelivered,target])
         }
         removeFromOrderedFood(target)
-        setDelivered(true)
+        //setDelivered(true)
 
       }
 
@@ -114,7 +116,7 @@ function WithFood(props) {
           setDrinkDelivered([...drinkDelivered,target])
         }
         removeFromOrderedDrink(target)
-        setDelivered(true)
+        //setDelivered(true)
       }
 
       const removeFromOrderedFood = (target) => {

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
-function Foods(props) {
+function Foods() {
 
     const [foods, setFoods] = useState([]);
 
