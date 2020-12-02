@@ -123,16 +123,23 @@ function WithFood(props) {
       }
 
       const addToDeliverd = (target) => {
+        let updated = props.groupsData[tablePosition].foodOrdered.filter(food => {
+          if (food.id !== target.id) {
+            return food
+          }
+        })
         props.setGroupsData([...props.groupsData.map(obj => {
           if (obj.id === props.tableId){
             if (obj.foodDelivered === null) {
               return {
                 ...obj,
+                foodOrdered:[...updated],
                 foodDelivered: [target]
               }
             }else{
               return{
                 ...obj,
+                foodOrdered:[...updated],
                 foodDelivered: [...obj.foodDelivered, target]
               }
             }
@@ -140,7 +147,10 @@ function WithFood(props) {
             return obj
           }
         })])
-        removeFromOrderedFood(target)
+        // setTimeout(() => {
+        //   removeFromOrderedFood(target)
+        // }, 2000);
+        
         //setDelivered(true)
 
       }
@@ -168,6 +178,7 @@ function WithFood(props) {
       }
 
       const removeFromOrderedFood = (target) => {
+        
         let updated = props.groupsData[tablePosition].foodOrdered.filter(food => {
           if (food.id !== target.id) {
             return food
@@ -178,7 +189,7 @@ function WithFood(props) {
           if (obj.id === props.tableId){
               return{
                 ...obj,
-                foodOrdered: [updated]
+                foodOrdered: [...updated]
               }
           }else{
             return obj
