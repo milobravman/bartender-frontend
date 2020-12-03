@@ -106,7 +106,7 @@ function WithFood(props) {
 
       const removeFromOrdered = (target) => {
         let updated = props.foodOrdered.filter(food => {
-          if (food.id != target.id) {
+          if (food.id !== target.id) {
             return food
           }
         })
@@ -115,7 +115,7 @@ function WithFood(props) {
 
       const removeFromOrderedDrinks = (target) => {
         let updated = props.drinkOrdered.filter(drink => {
-          if (drink.id != target.id) {
+          if (drink.id !== target.id) {
             return drink
           }
         })
