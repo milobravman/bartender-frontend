@@ -37,66 +37,52 @@ function WithFood(props) {
     //const [Delivered, setDelivered] = useState(null)
     const [group, setGroup] = useState([])
     const classes = useStyles();
-    const [foodOrdered, setFoodOrdered] = useState(null)
-    const [foodDelivered, setFoodDelivered] = useState(null)
-    const [drinkOrdered, setDrinkOrdered] = useState(null)
-    const [drinkDelivered, setDrinkDelivered] = useState(null)
 
-    useEffect(() => {
-        fetch(`http://localhost:3000/groups/${props.groupId}`,{
-          method: "get",
-          mode: 'cors',
-          headers: {'Content-Type': 'application/json'}
-        }).then(data => data.json())
-        .then(data => {
-          setGroup(data)
-          setFoodOrdered(data.foods)
-          setDrinkOrdered(data.drinks)
-          //debugger
-          props.setGroupsData([...props.groupsData].map(obj => {
-            //debugger
-            if (obj.id === props.tableId){
-              return {
-                ...obj,
-                foodOrdered: data.foods,
-                drinkOrdered: data.drinks
-              }
-            }else{
-              return obj
-            }
-          }))
-          if (props.foodOrdered != null){
-            setFoodOrdered(props.foodOrdered)
-          }
 
-        })
-      },[props.groupId, props.tablePosition])
+    // useEffect(() => {
+    //     fetch(`http://localhost:3000/groups/${props.groupId}`,{
+    //       method: "get",
+    //       mode: 'cors',
+    //       headers: {'Content-Type': 'application/json'}
+    //     }).then(data => data.json())
+    //     .then(data => {
+    //       setGroup(data)
+    //       setFoodOrdered(data.foods)
+    //       setDrinkOrdered(data.drinks)
+    //       //debugger
+    //       props.setGroupsData([...props.groupsData].map(obj => {
+    //         //debugger
+    //         if (obj.id === props.tableId){
+    //           return {
+    //             ...obj,
+    //             foodOrdered: data.foods,
+    //             drinkOrdered: data.drinks
+    //           }
+    //         }else{
+    //           return obj
+    //         }
+    //       }))
+    //       if (props.foodOrdered != null){
+    //         setFoodOrdered(props.foodOrdered)
+    //       }
+
+    //     })
+    //   },[props.groupId, props.tablePosition])
 
 
 
-      const updateGroup = () => {
-        fetch(`http://localhost:3000/groups/${props.groupId}`,{
-          method: "get",
-          mode: 'cors',
-          headers: {'Content-Type': 'application/json'}
-        }).then(data => data.json())
-        .then(data => {
-          setGroup(data)
-          setFoodOrdered(data.foods)
-          setDrinkOrdered(data.drinks)
-          props.setGroupsData([...props.groupsData.map(group => {
-            if (group.id === props.tableId){
-              return {
-                ...group,
-                foodOrdered: data.foods,
-                drinkOrdered: data.drinks
-              }
-            }else{
-              return group
-            }
-          })])
-        })
-      }
+          // props.setGroupsData([...props.groupsData.map(group => {
+          //   if (group.id === props.tableId){
+          //     return {
+          //       ...group,
+          //       foodOrdered: data.foods,
+          //       drinkOrdered: data.drinks
+          //     }
+          //   }else{
+          //     return group
+          //   }
+          // })])
+
 
       const showFoods = () => {
         setFMenu(!foodMenu)
@@ -198,15 +184,15 @@ function WithFood(props) {
         
       }
 
-      const removeFromOrderedDrink = (target) => {
-        let updated = drinkOrdered.filter(drink => {
-          if (drink.id !== target.id) {
-            return drink
-          }
-        })
-        props.setDrinkOrdered(updated)
-        setDrinkOrdered(updated)
-      }
+      // const removeFromOrderedDrink = (target) => {
+      //   let updated = drinkOrdered.filter(drink => {
+      //     if (drink.id !== target.id) {
+      //       return drink
+      //     }
+      //   })
+      //   props.setDrinkOrdered(updated)
+      //   setDrinkOrdered(updated)
+      // }
 
     return (
      <div className = {classes.paperDiv}>
@@ -250,7 +236,7 @@ function WithFood(props) {
                     {foodMenu === true?
                       <FoodForm 
                         groupId = {props.groupId} 
-                        updateGroup = {updateGroup}
+                        setGroupData = {props.setGroupsData}
                       />
                     :null}
                 </Paper>
@@ -262,7 +248,7 @@ function WithFood(props) {
                       <div id = "Ordered" style = {{marginRight: "8%", width: "35%"}}>
                         <h6 style = {{marginBottom: "0px", marginTop: "0px"}}>Ordered</h6>
                         <ul className = {classes.status}>
-                            {drinkOrdered? drinkOrdered.map((drink,index) => (
+                            {props.groupsData[tablePosition].drinkOrdered? props.groupsData[tablePosition].drinkOrdered.map((drink,index) => (
                                 <li onClick = {() => addToDrinkDeliverd(drink)} key = {index}>{drink.name}, price: {drink.price}</li>
                             )) :null}
                         </ul>
@@ -291,7 +277,7 @@ function WithFood(props) {
                     {drinkMenu === true?
                       <DrinkForm 
                         groupId = {props.groupId}
-                        updateGroup = {updateGroup}
+                        setGroupdata = {props.setGroupsData}
                       />
                     :null}
                 </Paper>
