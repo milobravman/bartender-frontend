@@ -90,14 +90,6 @@ function Info(props) {
                     setFoodsPrice = {setFoodsPrice}
                     groupId ={table.group.id} 
                     deleteGroup={deleteGroup}
-                    foodDelivered = {props.foodDelivered}
-                    foodOrdered = {props.foodOrdered}
-                    drinkDelivered = {props.drinkDelivered}
-                    drinkOrdered = {props.drinkOrdered}
-                    setFoodDelivered = {props.setFoodDelivered}
-                    setFoodOrdered = {props.setFoodOrdered}
-                    setDrinkDelivered = {props.setDrinkDelivered}
-                    setDrinkOrdered = {props.setDrinkOrdered}
                 />
             :
 
