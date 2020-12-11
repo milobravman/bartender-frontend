@@ -79,49 +79,32 @@ function WithFood(props) {
         return (<p>{DrinkPrice}$</p>)
       }
 
-      const addToDeliverd = (target) => {
-        if (props.foodDelivered === null) {
-          props.setFoodDelivered([target])
-        }
-        else {
-          props.setFoodDelivered([...props.foodDelivered,target])
-        }
-        removeFromOrdered(target)
+      const addToFoodDeliverd = (target) => {
+
+        fetch(`http://localhost:3000/food_groups/${target.id}`,{
+          method: "PATCH",
+          mode: "cors",
+          body: JSON.stringify( { status: "delivered" } ),
+          headers: {'Content-Type': 'application/json'}
+        })
+        .then(response => response.json())
+        .then(json => console.log(json))
+        
 
       }
 
       const addToDrinkDeliverd = (target) => {
-        if (props.drinkDelivered === null) {
-          props.setDrinkDelivered([target])
-        }
-        else {
-          props.setDrinkDelivered([...props.drinkDelivered,target])
-        }
-        removeFromOrderedDrinks(target)
+
+        console.log(target)
+
       }
 
-      const removeFromOrdered = (target) => {
-        let updated = props.foodOrdered.filter(food => {
-          if (food.id !== target.id) {
-            return food
-          }
-        })
-        props.setFoodOrdered(updated)
-      }
 
-      const removeFromOrderedDrinks = (target) => {
-        let updated = props.drinkOrdered.filter(drink => {
-          if (drink.id !== target.id) {
-            return drink
-          }
-        })
-        props.setDrinkOrdered(updated)
-      }
 
       const orderedListFood = (food_group) => {
         if (food_group.status === "ordered"){
           return <li 
-            onClick = {() => addToDeliverd(food_group)} 
+            onClick = {() => addToFoodDeliverd(food_group)} 
             key = {food_group.id}>
               {food_group.food.name}, price: {food_group.food.price}
             </li>
@@ -129,10 +112,10 @@ function WithFood(props) {
       }
 
       const orderedListDrink = (drink_group) => {
-        if (drink_group.status === null){
+        if (drink_group.status === "ordered"){
 
         return <li 
-        onClick = {() => addToDeliverd(drink_group)} 
+        onClick = {() => addToDrinkDeliverd(drink_group)} 
         key = {drink_group.id}>
           {drink_group.drink.name}, price: {drink_group.drink.price}
         </li>
