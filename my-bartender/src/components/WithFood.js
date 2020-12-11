@@ -81,14 +81,12 @@ function WithFood(props) {
 
       const addToFoodDeliverd = (target) => {
 
-        fetch(`http://localhost:3000/food_groups/${target.id}`,{
+        fetch(`http://localhost:3000/food_groups/${target.id}/c`,{
           method: "PATCH",
           mode: "cors",
-          body: JSON.stringify( { status: "delivered" } ),
           headers: {'Content-Type': 'application/json'}
         })
-        .then(response => response.json())
-        .then(json => console.log(json))
+        .then(response => updateGroup())
         
 
       }
@@ -105,6 +103,15 @@ function WithFood(props) {
         if (food_group.status === "ordered"){
           return <li 
             onClick = {() => addToFoodDeliverd(food_group)} 
+            key = {food_group.id}>
+              {food_group.food.name}, price: {food_group.food.price}
+            </li>
+        }
+      }
+
+      const deliveredListFood = (food_group) => {
+        if (food_group.status === "delivered"){
+          return <li  
             key = {food_group.id}>
               {food_group.food.name}, price: {food_group.food.price}
             </li>
@@ -140,8 +147,8 @@ function WithFood(props) {
                       <div id = "Delivered" style = {{marginLeft: "8%", width: "35%"}}>
                         <h6 style = {{marginBottom: "0px", marginTop: "0px"}}>Delivered</h6>
                         <ul className = {classes.status}>
-                          {props.foodDelivered? props.foodDelivered.map((food,index) => (
-                                <li key = {index}>{food.name}, price: {food.price}</li>
+                          {group.food_groups? group.food_groups.map((food_group) => (
+                                deliveredListFood(food_group)
                             )) :null}
                         </ul>
                       </div>
