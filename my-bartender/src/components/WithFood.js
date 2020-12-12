@@ -80,21 +80,21 @@ function WithFood(props) {
       }
 
       const addToFoodDeliverd = (target) => {
-
         fetch(`http://localhost:3000/food_groups/${target.id}/c`,{
           method: "PATCH",
           mode: "cors",
           headers: {'Content-Type': 'application/json'}
         })
         .then(response => updateGroup())
-        
-
       }
 
       const addToDrinkDeliverd = (target) => {
-
-        console.log(target)
-
+        fetch(`http://localhost:3000/drink_groups/${target.id}/c`,{
+          method: "PATCH",
+          mode: "cors",
+          headers: {'Content-Type': 'application/json'}
+        })
+        .then(response => updateGroup())
       }
 
 
@@ -126,6 +126,15 @@ function WithFood(props) {
         key = {drink_group.id}>
           {drink_group.drink.name}, price: {drink_group.drink.price}
         </li>
+        }
+      }
+
+      const deliveredListDrink = (drink_group) => {
+        if (drink_group.status === "delivered"){
+          return <li  
+            key = {drink_group.id}>
+              {drink_group.drink.name}, price: {drink_group.drink.price}
+            </li>
         }
       }
     return (
@@ -188,8 +197,8 @@ function WithFood(props) {
                       <div id = "Delivered" style = {{marginLeft: "8%", width: "35%"}}>
                         <h6 style = {{marginBottom: "0px", marginTop: "0px"}}>Delivered</h6>
                         <ul className = {classes.status}>
-                          {props.drinkDelivered? props.drinkDelivered.map((drink,index) => (
-                                <li key = {index}>{drink.name}, price: {drink.price}</li>
+                          {group.drink_groups? group.drink_groups.map((drink_group) => (
+                                deliveredListDrink(drink_group)
                             )) :null}
                         </ul>
                       </div>
