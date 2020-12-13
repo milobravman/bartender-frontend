@@ -68,13 +68,13 @@ function WithFood(props) {
       
       const calcFood$ = () => {
         let FoodPrice = 0
-        group.foods.map(food => FoodPrice+=food.price)
+        group.food_groups.map(food_group => FoodPrice+= food_group.food.price)
         props.setFoodsPrice(FoodPrice)
         return (<p>{FoodPrice}$</p>)
       }
       const calcDrink$ = () => {
         let DrinkPrice = 0
-        group.drinks.map(drink => DrinkPrice+=drink.price)
+        group.drink_groups.map(drink_group => DrinkPrice+= drink_group.drink.price)
         props.setDrinksPrice(DrinkPrice)
         return (<p>{DrinkPrice}$</p>)
       }
@@ -163,7 +163,7 @@ function WithFood(props) {
                       </div>
                     </div>
                     <p>
-                      {group.foods? calcFood$(): null}
+                      {group.food_groups? calcFood$(): null}
                     </p>
                     <Button 
                         style = {{
@@ -204,7 +204,7 @@ function WithFood(props) {
                       </div>
                     </div>
                     <p>
-                      {group.drinks? calcDrink$(): null}
+                      {group.drink_groups? calcDrink$(): null}
                     </p>
                     <Button 
                         style = {{
