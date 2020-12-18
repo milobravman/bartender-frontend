@@ -1,17 +1,20 @@
-
 import './App.css';
-import React, {useEffect, useState} from 'react'
+
+//components 
 import TablesMap from './components/TablesMap.js'
 import About from './components/About.js'
 import Header from './components/Header.js'
 import Drinks from './components/Drinks.js'
 import Foods from './components/Foods.js'
+import Info from './components/Info.js'
+
+
+// are put into switch and route tags to give front end routing
 import {
   Switch,
   Route,
 } from "react-router-dom";
 import { withRouter } from "react-router" //use history for login
-import Info from './components/Info.js'
 
 function App(props) {
 
