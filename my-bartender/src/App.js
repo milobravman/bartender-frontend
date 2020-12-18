@@ -25,13 +25,10 @@ function App(props) {
   }
 
   // pushes the table index path to the URI
-  // 
+  // ******* passed down to info but may never be used and could be code to be deleted ******
   const showTables = () => {
     props.history.push(`/`)
   }
-
-
-
 
   return (
     <>
@@ -39,9 +36,7 @@ function App(props) {
         <Switch>
           <Route exact path="/">
             <Header/>
-            <TablesMap 
-              showTable = {showTable}
-            />
+            <TablesMap showTable = {showTable}/>
           </Route>
           <Route exact path="/About">
             <Header/>
