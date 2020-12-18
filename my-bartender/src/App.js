@@ -1,6 +1,6 @@
 import './App.css';
 
-//components 
+//Importing compentest that will be used in the app.js file 
 import TablesMap from './components/TablesMap.js'
 import About from './components/About.js'
 import Header from './components/Header.js'
@@ -9,7 +9,7 @@ import Foods from './components/Foods.js'
 import Info from './components/Info.js'
 
 
-// are put into switch and route tags to give front end routing
+// importing routing dependencies so app has front end routing
 import {
   Switch,
   Route,
@@ -18,9 +18,14 @@ import { withRouter } from "react-router" //use history for login
 
 function App(props) {
 
+  // showTable pushes the spesiic table path to the URI (links to the table the user clicks)
+  // passed the tablesmap components
   const showTable = (table_id) => {
     props.history.push(`/Info/${table_id}`)
   }
+
+  // pushes the table index path to the URI
+  // 
   const showTables = () => {
     props.history.push(`/`)
   }
