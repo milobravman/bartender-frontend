@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
 // setting up react-routes
 import { BrowserRouter } from 'react-router-dom';
 
@@ -21,3 +20,5 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+// not much going on in here should see if reportWebVitals(); and strict mode are unimportant
