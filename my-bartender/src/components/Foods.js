@@ -1,9 +1,13 @@
 import React, {useEffect, useState} from 'react';
 
+
+// simple index page
 function Foods(props) {
 
     const [foods, setFoods] = useState([]);
 
+
+    // useEffect fetches the relivent data
     useEffect(()=> {
         fetch("http://localhost:3000/foods",{
           method: "get",

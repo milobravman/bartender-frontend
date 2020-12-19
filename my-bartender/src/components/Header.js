@@ -31,10 +31,8 @@ const useStyles = makeStyles({
         <Tab v icon={<HomeIcon/>}/>
       </Link>
    
-
        <Link to="/drinks"><Tab  icon={<LocalBarIcon/>}/></Link>
        <Link to="/foods"><Tab  icon={<FastfoodIcon />}/></Link>
-
 
        
       </Tabs>

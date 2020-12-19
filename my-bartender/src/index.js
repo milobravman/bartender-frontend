@@ -21,4 +21,4 @@ ReactDOM.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 
-// not much going on in here should see if reportWebVitals(); and strict mode are unimportant
+// not much going on in here. I should see if reportWebVitals(); and strict mode are unimportant

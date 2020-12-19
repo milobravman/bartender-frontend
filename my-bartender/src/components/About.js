@@ -3,9 +3,11 @@ import React from 'react';
 function About(props) {
     return (
         <div>
-            Hello this is the about page also testing react router
+            Welcome to My-bartender 1.0! 
         </div>
     );
 }
 
 export default About;
+
+// About page should evenetally become a place to advertise myself and what I do
