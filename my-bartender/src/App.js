@@ -30,6 +30,8 @@ function App(props) {
     props.history.push(`/`)
   }
 
+
+  // React Client side rounting. this is what gives single page applications more routes to work with
   return (
     <>
       <div className="App">
@@ -60,13 +62,11 @@ function App(props) {
                 tableId = {tableId} 
                 showTable = {showTable}
                 showTables = {showTables}
-
-                />
+              />
               </>
             )
           }} 
           />
-    
         </Switch>
       </div>
     </>
