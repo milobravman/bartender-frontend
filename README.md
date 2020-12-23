@@ -1,3 +1,6 @@
+# My-Bratender Youtube Demo! 
+    https://www.youtube.com/watch?v=EQ3wXLKkQs0
+
 # bartender-frontend
 
 This Application's purpose is to centralize the information a bartender or waiter needs to be aware of to do their job effectively. The My-Bartender app achieves this by using the Homepage as an overview of what is going on in the bar. From the Home page, the user can click on a table to assign a group there or see what the status of the groups already seated is.
