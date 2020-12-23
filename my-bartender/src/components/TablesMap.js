@@ -44,6 +44,28 @@ function TablesMap(props) {
       .then(data => setTables(data))
     }, [])
 
+    const tableHasGroup = (table) =>
+    {
+      if (table.group){
+        return (groupStatus(table))
+      }
+      else {
+        return (<h3>Table {table.position} is empty!</h3>)
+      }
+
+    }
+
+    const groupStatus = (table) => {
+      if (table.group.food_groups)
+      {
+
+      }
+      return (
+      <>
+      <h3>Table {table.position} occupied with {table.group.num_people} people</h3>
+      </>)
+    }
+
 
     //JSX with very confusing CSS the Gridlist ul has a margin of -2. Why I do not know
     return (
@@ -66,14 +88,7 @@ function TablesMap(props) {
                   style = {{border: "solid #000",
                     borderWidth: "1px"}}
                 >
-                    {table.group?
-                      <h3>
-                        {`Table occupied with ${table.group.num_people} people`}
-                      </h3>:
-                      <h3>
-                        Empty
-                      </h3>
-                    }
+                  {tableHasGroup(table)}
               <GridListTileBar
                   title={
                   <Button style = {{ backgroundColor: "#add8e6"}}>{`Table: ${table.position}`}</Button>}
