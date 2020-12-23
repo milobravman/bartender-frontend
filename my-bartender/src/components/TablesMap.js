@@ -18,8 +18,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    width: 500,
-    height: 450,
+    width: "50%",
+    height: 650,
     marginTop: "1%"
   },
   icon: {
@@ -50,7 +50,12 @@ function TablesMap(props) {
       <>
       <h3>Table Overview</h3>
         <div className={classes.root}>
-          <GridList cellHeight={180} className={classes.gridList}>
+          <GridList 
+            cellHeight={300} 
+            cellWidth={300} 
+            className={classes.gridList}
+
+          >
             <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
             </GridListTile>
 
@@ -69,8 +74,7 @@ function TablesMap(props) {
                         Empty
                       </h3>
                     }
-                      <GridListTileBar
-                        
+              <GridListTileBar
                   title={
                   <Button style = {{ backgroundColor: "#add8e6"}}>{`Table: ${table.position}`}</Button>}
                         actionIcon={
@@ -78,7 +82,8 @@ function TablesMap(props) {
                           aria-label={`info about ${table.position}`} 
                           className={classes.icon}>
                           <InfoIcon />
-                        </IconButton>}/>
+                        </IconButton>}
+              />
               </GridListTile>))}
           </GridList>
         </div>
