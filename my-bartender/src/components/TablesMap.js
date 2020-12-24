@@ -116,7 +116,7 @@ function TablesMap(props) {
               Table {table.position} is occupied with {table.group.num_people} people
             </h3>
             <p>
-              This Table has: 
+              This Group has: 
             </p>
             <p>
             {food_delivered}/{total_foods} pieces of food delivered 
