@@ -44,6 +44,8 @@ function TablesMap(props) {
       .then(data => setTables(data))
     }, [])
 
+
+    // tableHasGroup checks if the table is empty or if it has a group
     const tableHasGroup = (table) =>
     {
       if (table.group){
@@ -55,7 +57,9 @@ function TablesMap(props) {
 
     }
 
+    // groupStatus is responsible for checking both if the group has orded food or drinks and if any food or drinks has been delivered to the groups.
     const groupStatus = (table) => {
+      //Varablies declared
       let total_foods = table.group.food_groups.length
       let total_drinks = table.group.drink_groups.length
 
@@ -64,6 +68,8 @@ function TablesMap(props) {
 
       let drink_orderd = 0
       let drink_delivered = 0
+
+      
 
       if (total_foods > 0 )
       {
