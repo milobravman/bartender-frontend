@@ -119,16 +119,11 @@ function TablesMap(props) {
               This Table has: 
             </p>
             <p>
-              {food_orderd} pieces of food orderd 
+            {food_delivered}/{total_foods} pieces of food delivered 
             </p>
+
             <p>
-              {food_delivered} pieces of food delivered 
-            </p>
-            <p>
-              {drink_orderd} drinks orderd 
-            </p>
-            <p>
-              {drink_delivered} drinks delivered 
+            {drink_delivered}/{total_drinks} drinks delivered 
             </p>
           </>
         )
