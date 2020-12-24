@@ -74,11 +74,11 @@ function TablesMap(props) {
       if (total_foods > 0 )
       {
         table.group.food_groups.map(food => {
-          if (food.status == "ordered")
+          if (food.status === "ordered")
           {
             food_orderd++
           }
-          if (food.status == "delivered")
+          if (food.status === "delivered")
             food_delivered++
         })
       }
@@ -86,11 +86,11 @@ function TablesMap(props) {
       if (total_drinks > 0 )
       {
         table.group.drink_groups.map(drink => {
-          if (drink.status == "ordered")
+          if (drink.status === "ordered")
           {
             drink_orderd++
           }
-          if (drink.status == "delivered")
+          if (drink.status === "delivered")
             drink_delivered++
         })
       }
