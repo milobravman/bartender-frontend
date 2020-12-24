@@ -56,8 +56,40 @@ function TablesMap(props) {
     }
 
     const groupStatus = (table) => {
+      let total_foods = table.group.food_groups.length
+      let total_drinks = table.group.drink_groups.length
 
-      if (table.group.food_groups.length === 0 && table.group.drink_groups.length === 0)
+      let food_orderd = 0
+      let food_delivered = 0
+
+      let drink_orderd = 0
+      let drink_delivered = 0
+
+      if (total_foods > 0 )
+      {
+        table.group.food_groups.map(food => {
+          if (food.status == "ordered")
+          {
+            food_orderd++
+          }
+          if (food.status == "delivered")
+            food_delivered++
+        })
+      }
+
+      if (total_drinks > 0 )
+      {
+        table.group.drink_groups.map(drink => {
+          if (drink.status == "ordered")
+          {
+            drink_orderd++
+          }
+          if (drink.status == "delivered")
+            drink_delivered++
+        })
+      }
+
+      if (total_foods === 0 && total_drinks === 0)
       {
         return (
         <>
@@ -71,14 +103,25 @@ function TablesMap(props) {
         )
       }
       else {
-        debugger
         return (
           <>
             <h3>
               Table {table.position} is occupied with {table.group.num_people} people
             </h3>
             <p>
-              Something Has been ordered or delivered to this table
+              This Table has: 
+            </p>
+            <p>
+              {food_orderd} pieces of food orderd 
+            </p>
+            <p>
+              {food_delivered} pieces of food delivered 
+            </p>
+            <p>
+              {drink_orderd} drinks orderd 
+            </p>
+            <p>
+              {drink_delivered} drinks delivered 
             </p>
           </>
         )
