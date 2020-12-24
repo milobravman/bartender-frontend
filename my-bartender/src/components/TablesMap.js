@@ -56,14 +56,49 @@ function TablesMap(props) {
     }
 
     const groupStatus = (table) => {
-      if (table.group.food_groups)
-      {
 
+      if (table.group.food_groups.length === 0 && table.group.drink_groups.length === 0)
+      {
+        return (
+        <>
+          <h3>
+            Table {table.position} is occupied with {table.group.num_people} people
+          </h3>
+          <p>
+            Nothing Has been ordered or delivered to this table
+          </p>
+        </>
+        )
       }
-      return (
-      <>
-      <h3>Table {table.position} occupied with {table.group.num_people} people</h3>
-      </>)
+      else {
+        debugger
+        return (
+          <>
+            <h3>
+              Table {table.position} is occupied with {table.group.num_people} people
+            </h3>
+            <p>
+              Something Has been ordered or delivered to this table
+            </p>
+          </>
+        )
+      }
+
+
+
+      // if (table.group.food_groups === undefined && table.group.drink_groups === undefined)
+      // {
+      //   debugger
+      //   return (
+      //     <>
+      //     <h3>Table {table.position} is occupied with {table.group.num_people} people</h3>
+      //     <h4>Nothing has been ordered yet</h4>
+      //     </>)
+      // }
+      // return (
+      // <>
+      // <h3>Table {table.position} is occupied with {table.group.num_people} people</h3>
+      // </>)
     }
 
 
