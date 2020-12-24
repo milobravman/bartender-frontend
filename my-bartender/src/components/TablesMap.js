@@ -69,7 +69,7 @@ function TablesMap(props) {
       let drink_orderd = 0
       let drink_delivered = 0
 
-      
+      // this if statement checks if the group's food and drinks are greater than zero and then maps and counts how many foods and drinks have been ordered or delivered.
 
       if (total_foods > 0 )
       {
@@ -95,6 +95,7 @@ function TablesMap(props) {
         })
       }
 
+      // this if statement conditionaly renderes the groups drink and food status 
       if (total_foods === 0 && total_drinks === 0)
       {
         return (
@@ -133,21 +134,6 @@ function TablesMap(props) {
         )
       }
 
-
-
-      // if (table.group.food_groups === undefined && table.group.drink_groups === undefined)
-      // {
-      //   debugger
-      //   return (
-      //     <>
-      //     <h3>Table {table.position} is occupied with {table.group.num_people} people</h3>
-      //     <h4>Nothing has been ordered yet</h4>
-      //     </>)
-      // }
-      // return (
-      // <>
-      // <h3>Table {table.position} is occupied with {table.group.num_people} people</h3>
-      // </>)
     }
 
 
@@ -169,7 +155,8 @@ function TablesMap(props) {
                 <GridListTile 
                   key={table.id} 
                   onClick = {() => props.showTable(table.id)}
-                  style = {{border: "solid #000",
+                  style = {{
+                    border: "solid #000",
                     borderWidth: "1px"}}
                 >
                   {tableHasGroup(table)}
