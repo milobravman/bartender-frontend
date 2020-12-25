@@ -36,10 +36,19 @@ function Info(props) {
     }
 
     
+    /*
+    This is deffently a strange way to handle this form
+    the handleChange function is what hold the value of the from in state 
+
+    The handleCreateGroups then creates the group by using that number
+
+    I think that there is no reason to save the Group's size in state and simply handling the form when it is submited would be better
+    */
     const handleChange = (event) =>{
         setSize({size: event.target.value})
     }
-    const handleSubmit = () =>{
+    const handleCreateGroup = () =>{
+    
         let group = {
             num_people: groupSize.size,
             table_id: props.tableId
@@ -96,7 +105,7 @@ function Info(props) {
                     showTable = {props.showTable}
                     showTables = {props.showTables}
                     updateTable = {updateTable}
-                    handleSubmit = {handleSubmit}
+                    handleSubmit = {handleCreateGroup}
                     handleChange = {handleChange}
                 />
 
