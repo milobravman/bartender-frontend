@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
   
   }));
 
-
+// This componet is responsible for adding a new group to a table.
+// This component needs front end validations baced on the tables seasting size
 function WithoutFood(props) {
 
     const classes = useStyles();

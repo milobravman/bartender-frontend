@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// This component is responsible for adding Drinks to a groups ordered list
 export default function DrinkForm(props) {
   const classes = useStyles();
   const [drinkId, setDrinkId] = useState('');
