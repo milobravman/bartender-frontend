@@ -60,7 +60,6 @@ function App(props) {
               <Header/>
               <Info 
                 tableId = {tableId} 
-                showTable = {showTable}
                 showTables = {showTables}
               />
               </>

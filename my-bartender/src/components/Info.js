@@ -49,16 +49,25 @@ function Info(props) {
     }
     const handleCreateGroup = () =>{
     
-        let group = {
-            num_people: groupSize.size,
-            table_id: props.tableId
+        if (groupSize.size <= table.seats){
+
+            let group = {
+                num_people: groupSize.size,
+                table_id: props.tableId
+            }
+            fetch(`http://localhost:3000/groups/`, {
+                method: "post",
+                mode: 'cors',
+                headers:{'Content-Type': 'application/json'},
+                body: JSON.stringify(group)
+            }).then(response => updateTable())
+
         }
-        fetch(`http://localhost:3000/groups/`, {
-            method: "post",
-            mode: 'cors',
-            headers:{'Content-Type': 'application/json'},
-            body: JSON.stringify(group)
-        }).then(response => updateTable())
+        else 
+        {
+            console.log(`The group is too large${groupSize.size}`)
+        }
+
         
     }
 
@@ -102,8 +111,6 @@ function Info(props) {
             :
 
                 <WithoutFood
-                    showTable = {props.showTable}
-                    showTables = {props.showTables}
                     updateTable = {updateTable}
                     handleSubmit = {handleCreateGroup}
                     handleChange = {handleChange}
