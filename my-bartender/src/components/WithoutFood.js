@@ -12,6 +12,9 @@ const useStyles = makeStyles((theme) => ({
         width: '25ch',
       },
     },
+    error:  {
+      color: "red"
+    },
     paper: {
       padding: theme.spacing(2),
       textAlign: 'center',
@@ -58,7 +61,9 @@ function WithoutFood(props) {
       }
       else 
       {
-          console.log(`The group is too large${props.groupSize.size}`)
+          alert(`The group has more people than the table can hold!`)
+          document.querySelector("#groupSize").value = ""
+          document.querySelector("#sizeLimit").className = classes.error
       }
       
   }
@@ -69,7 +74,13 @@ function WithoutFood(props) {
     return (
 
         <>
-            <p>This table is Empty. It can hold {props.table.seats} people</p>
+            <p>
+              This table is Empty. 
+              <span id = "sizeLimit">
+              {` It can hold ${props.table.seats} `} 
+              </span> 
+              people
+              </p>
             <form className={classes.root} noValidate autoComplete="off">
                 <TextField 
                     id="groupSize" 
