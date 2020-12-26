@@ -27,6 +27,45 @@ function WithoutFood(props) {
 
     const classes = useStyles();
 
+    /*
+    This is deffently a strange way to handle this form
+    the handleChange function is what hold the value of the from in state 
+
+    The handleCreateGroups then creates the group by using that number
+
+    I think that there is no reason to save the Group's size in state and simply handling the form when it is submited would be better
+    */
+
+    const handleChange = (event) =>
+    {
+      props.setSize({size: event.target.value})
+    }
+    const handleCreateGroup = () =>{
+  
+      if (props.groupSize.size <= props.table.seats){
+
+          let group = {
+              num_people: props.groupSize.size,
+              table_id: props.table.id
+          }
+          fetch(`http://localhost:3000/groups/`, {
+              method: "post",
+              mode: 'cors',
+              headers:{'Content-Type': 'application/json'},
+              body: JSON.stringify(group)
+          }).then(response => props.updateTable())
+
+      }
+      else 
+      {
+          console.log(`The group is too large${props.groupSize.size}`)
+      }
+      
+  }
+
+
+
+
     return (
 
         <>
@@ -35,12 +74,12 @@ function WithoutFood(props) {
                 <TextField 
                     id="groupSize" 
                     label="number of people" 
-                    onChange = {(event) => props.handleChange(event)}
+                    onChange = {(event) => handleChange(event)}
                 />
             </form>
             <Button type ="submit" variant="contained" 
                     onClick= {() => {
-                        props.handleSubmit()
+                      handleCreateGroup()
                         }}>
                 Add a new Group
             </Button>

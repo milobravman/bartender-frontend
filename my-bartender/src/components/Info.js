@@ -35,42 +35,6 @@ function Info(props) {
             })
     }
 
-    
-    /*
-    This is deffently a strange way to handle this form
-    the handleChange function is what hold the value of the from in state 
-
-    The handleCreateGroups then creates the group by using that number
-
-    I think that there is no reason to save the Group's size in state and simply handling the form when it is submited would be better
-    */
-    const handleChange = (event) =>{
-        setSize({size: event.target.value})
-    }
-    const handleCreateGroup = () =>{
-    
-        if (groupSize.size <= table.seats){
-
-            let group = {
-                num_people: groupSize.size,
-                table_id: props.tableId
-            }
-            fetch(`http://localhost:3000/groups/`, {
-                method: "post",
-                mode: 'cors',
-                headers:{'Content-Type': 'application/json'},
-                body: JSON.stringify(group)
-            }).then(response => updateTable())
-
-        }
-        else 
-        {
-            console.log(`The group is too large${groupSize.size}`)
-        }
-
-        
-    }
-
     const deleteGroup = (id) => {
         fetch('http://localhost:3000/groups/' + id, {
         method: 'DELETE',
@@ -78,8 +42,6 @@ function Info(props) {
         .then(res => res.text()) // or res.json()
         .then(res => {props.showTables()})
     }
-
-
 
     return (
         <div>
@@ -111,9 +73,10 @@ function Info(props) {
             :
 
                 <WithoutFood
+                    setSize = {setSize}
+                    groupSize = {groupSize}
+                    table = {table}
                     updateTable = {updateTable}
-                    handleSubmit = {handleCreateGroup}
-                    handleChange = {handleChange}
                 />
 
             }
