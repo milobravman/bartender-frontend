@@ -69,7 +69,7 @@ function WithoutFood(props) {
     return (
 
         <>
-            <p>This table is Empty</p>
+            <p>This table is Empty. It can hold {props.table.seats} people</p>
             <form className={classes.root} noValidate autoComplete="off">
                 <TextField 
                     id="groupSize" 
