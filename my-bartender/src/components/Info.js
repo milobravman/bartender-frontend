@@ -4,11 +4,17 @@ import WithoutFood from './WithoutFood'
 import Button from '@material-ui/core/Button';
 
 
-
+/*
+    Info page conditionaly rendereds the the WithFood or WithoutFood
+    Components depending on if this speficic table has a group assigned or not
+*/
 
 
 function Info(props) {
 
+
+    // state variables that need to be held at the info level
+    // groupSize many not need to be at this level or an array
     const [table, setTable] = useState([]);
     const [groupSize, setSize] = useState([])
     const [foodsPrice, setFoodsPrice] = useState('')
