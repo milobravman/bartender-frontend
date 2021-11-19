@@ -63,10 +63,10 @@ function TablesMap(props) {
       let total_foods = table.group.food_groups.length
       let total_drinks = table.group.drink_groups.length
 
-      let food_orderd = 0
+      // let food_orderd = 0
       let food_delivered = 0
 
-      let drink_orderd = 0
+      // let drink_orderd = 0
       let drink_delivered = 0
 
       // this if statement checks if the group's food and drinks are greater than zero and then maps and counts how many foods and drinks have been ordered or delivered.
@@ -76,7 +76,7 @@ function TablesMap(props) {
         table.group.food_groups.map(food => {
           if (food.status === "ordered")
           {
-            food_orderd++
+            // food_orderd++
           }
           if (food.status === "delivered")
             food_delivered++
@@ -88,7 +88,7 @@ function TablesMap(props) {
         table.group.drink_groups.map(drink => {
           if (drink.status === "ordered")
           {
-            drink_orderd++
+            // drink_orderd++
           }
           if (drink.status === "delivered")
             drink_delivered++
